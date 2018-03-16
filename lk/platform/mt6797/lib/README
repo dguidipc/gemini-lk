@@ -1,0 +1,27 @@
+This directory contains little kernel library, which contains essential components for verified boot.
+
+WHAT IT DOES?
+=============
+It contains components for the following features in lk:
+1. Security policy: permission for flash/erase and other operations to change the state of device.
+2. Image authentication: used to verify the integrity and authenticity of image, which includes but not limited to logo/boot/recovery images.
+3. Security info: devinfo is the module used to collect information required for security services.
+
+LK security library contains:
+1. libauth.a
+2. libdevinfo.a
+3. libsec.a
+4. libsplat.a
+
+HOW IT WAS BUILT?
+==================
+lk security library is built from Mediatek ASF code base and it's not part of android.
+
+HOW TO USE IT?
+==============
+These static libraries are in alps/vendor/mediatek/proprietary/bootable/bootloader/lk/platform/${PLATFORM}/lib.
+They are required in LK building process. No further action is required to use them.
+
+Source
+==============
+All the source code of this library were written by MediaTek co..

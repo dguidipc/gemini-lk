@@ -16,7 +16,7 @@
 
 BOOL factory_check_key_trigger(void)
 {
-#if 1
+#ifdef MT65XX_FACTORY_KEY
 	//wait
 	ulong begin = get_timer(0);
 	dprintf(CRITICAL, "\n%s Check factory boot\n",MODULE_NAME);

@@ -170,7 +170,7 @@ int set_write_protect()
 					return err;
 				}
 			}
-		}
+		} 
 #endif
 
 		/*Group 3 - from persist/oemkeystore to system/keystore*/
@@ -187,6 +187,9 @@ int set_write_protect()
 		sprintf(wp_start, "%s", "oemkeystore");
 #endif
 
+/*
+-- Change requested by Nikita to allow replacing kernel from running Linux --
+
 #ifdef MTK_SECURITY_SW_SUPPORT
 		if (TRUE == seclib_sec_boot_enabled(TRUE)) {
 			sprintf(wp_end, "%s", "system");
@@ -196,6 +199,9 @@ int set_write_protect()
 #else
 		sprintf(wp_end, "%s", "keystore");
 #endif
+*/
+		printf(wp_end, "%s", "nvram");
+
 		dprintf(INFO, "[%s]: Lock %s->%s \n", __func__, wp_start, wp_end);
 		err = partition_write_prot_set(wp_start, wp_end, WP_POWER_ON);
 		if (err != 0) {

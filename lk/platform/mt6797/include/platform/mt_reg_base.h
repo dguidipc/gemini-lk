@@ -521,7 +521,9 @@
 #endif
 #define CFG_FACTORY_NAME    "factory.img"
 //#define HAVE_LK_TEXT_MENU
-
+//guohuajun add
+#define CONFIG_MTK_USB_UNIQUE_SERIAL
+//guohuajun add end
 #ifdef CONFIG_MTK_USB_UNIQUE_SERIAL
 #define EFUSE_CTR_BASE      0x10206000  /* IO_PHYS + 0x01019000 */
 //#define PDN_CTR           0xC0001020  /* IO_PHYS + 0x00001020 */

@@ -144,6 +144,7 @@ void boot_mode_select(void)
 #endif
 	while (get_timer(begin)<50) {
 
+#ifdef MT65XX_FACTORY_KEY
 
 		if (!factory_forbidden) {
 			if (mtk_detect_key(MT65XX_FACTORY_KEY)) {
@@ -154,7 +155,7 @@ void boot_mode_select(void)
 				return;
 			}
 		}
-
+#endif
 		if (mtk_detect_key(MT65XX_BOOT_MENU_KEY)) {
 			dprintf(CRITICAL, "\n%s Check  boot menu\n",MODULE_NAME);
 			dprintf(CRITICAL, "%s Wait 50ms for special keys\n",MODULE_NAME);
@@ -167,7 +168,7 @@ void boot_mode_select(void)
 			return;
 		}
 #ifdef MT65XX_RECOVERY_KEY
-		if (mtk_detect_key(MT65XX_RECOVERY_KEY)) {
+		if (mtk_detect_key(MTK_PMIC_PWR_KEY) && !mtk_detect_key(17)) {
 			dprintf(CRITICAL, "%s Detect cal key\n",MODULE_NAME);
 			dprintf(CRITICAL, "%s Enable recovery mode\n",MODULE_NAME);
 			g_boot_mode = RECOVERY_BOOT;
@@ -225,6 +226,8 @@ void boot_mode_select(void)
 			return TRUE;
 		}
 #endif
+#ifdef MT65XX_FACTORY_KEY
+
 		if (!factory_forbidden) {
 			if (mtk_detect_key(MT65XX_FACTORY_KEY)) {
 				dprintf(INFO, "%s Detect key\n",MODULE_NAME);
@@ -234,8 +237,9 @@ void boot_mode_select(void)
 				return TRUE;
 			}
 		}
+#endif
 #ifdef MT65XX_RECOVERY_KEY
-		if (mtk_detect_key(MT65XX_RECOVERY_KEY)) {
+		if (mtk_detect_key(MTK_PMIC_PWR_KEY) && !mtk_detect_key(17)) {
 			dprintf(INFO, "%s Detect cal key\n",MODULE_NAME);
 			dprintf(INFO, "%s Enable recovery mode\n",MODULE_NAME);
 			g_boot_mode = RECOVERY_BOOT;

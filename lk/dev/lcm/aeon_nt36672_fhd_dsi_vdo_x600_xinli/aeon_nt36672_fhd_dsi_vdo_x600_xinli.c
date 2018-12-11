@@ -869,10 +869,11 @@ static unsigned int lcm_compare_id(void)
 	lcm_id = (id<<8)|id1;
 	
 	printf("NT36672 id = 0x%x, id1=0x%x\n", id, id1);
-	if(LCM_ID_NT36672 == lcm_id)
+	if(LCM_ID_NT36672 == lcm_id){
 		return 1;
-	else
+	}else{
 		return 0;
+	}
 }
 
 static void lcm_init(void)

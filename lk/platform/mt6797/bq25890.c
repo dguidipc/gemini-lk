@@ -736,7 +736,7 @@ void bq25890_hw_init(void)
 {
 	bq25890_wd_reset(1); // wdt reset
 	bq25890_otg_en(0);  // Disable OTG boost
-	bq25890_en_state_dis(1);
+	//bq25890_en_state_dis(1);
 	bq25890_en_chg_timer(1);     // Disable Safty timer
 
 	bq25890_set_iterml(0x2);   // ITERM = TBD 0x02=128mAi

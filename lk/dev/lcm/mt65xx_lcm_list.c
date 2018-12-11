@@ -50,6 +50,7 @@
 
 extern LCM_DRIVER r63419_fhd_truly_phantom_lcm_drv;
 extern LCM_DRIVER aeon_nt36672_fhd_dsi_vdo_x600_xinli_lcm_drv;
+extern LCM_DRIVER aeon_ssd2092_fhd_dsi_solomon_lcm_drv;
 
 LCM_DRIVER *lcm_driver_list[] = {
 #if defined(R63419_FHD_TRULY_PHANTOM_2K_CMD_OK_WS3142)
@@ -57,6 +58,9 @@ LCM_DRIVER *lcm_driver_list[] = {
 #endif
 #if defined(AEON_NT36672_FHD_DSI_VDO_X600_XINLI)
 	&aeon_nt36672_fhd_dsi_vdo_x600_xinli_lcm_drv,
+#endif
+#if defined(AEON_SSD2092_FHD_DSI_SOLOMON)
+	&aeon_ssd2092_fhd_dsi_solomon_lcm_drv,
 #endif
 };
 

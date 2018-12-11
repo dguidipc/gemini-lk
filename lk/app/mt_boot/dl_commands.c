@@ -489,7 +489,12 @@ void cmd_flash_mmc_sparse_img(const char *arg, void *data, unsigned sz)
 		return;
 	}
 
-	data += sparse_header->file_hdr_sz;
+        if(sparse_header->file_hdr_sz > sz)
+        {
+              fastboot_fail("sparse image header invalid.");
+              return;
+        }
+	data += sizeof(sparse_header_t);
 	if (sparse_header->file_hdr_sz > sizeof(sparse_header_t)) {
 		/* Skip the remaining bytes in a header that is longer than
 		 * we expected.
@@ -526,7 +531,24 @@ void cmd_flash_mmc_sparse_img(const char *arg, void *data, unsigned sz)
 			data += (sparse_header->chunk_hdr_sz - sizeof(chunk_header_t));
 		}
 
+                if(size/sparse_header->blk_sz < chunk_header->chunk_sz)
+                {
+                     fastboot_fail("sparse chunk size is too big.");
+                     return;
+                }
 		chunk_data_sz = sparse_header->blk_sz * chunk_header->chunk_sz;
+
+                //check chunk bounadary
+                if(sparse_header->blk_sz * ((unsigned long long)chunk_header->chunk_sz + total_blocks) > size)
+                {
+                    fastboot_fail("sparse chunk size overflow.");
+                    return;
+                }
+                if((sparse_header->total_blks - total_blocks) < chunk_header->chunk_sz)
+                {
+                    fastboot_fail("sparse chunk blocks bigger than total blocks.");
+                    return;
+                }
 		switch (chunk_header->chunk_type) {
 			case CHUNK_TYPE_RAW:
 				if (chunk_header->total_sz != (sparse_header->chunk_hdr_sz +
